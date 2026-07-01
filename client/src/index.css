@@ -1,0 +1,78 @@
+@import 'tailwindcss';
+
+/*
+  Design tokens - "Academic Register" theme.
+  Ink-and-ledger palette: deep indigo ink, warm paper background, amber
+  accent (registers/stamps), sage for present/success, clay for absent/danger.
+  Fraunces (serif, ledger-like) for headings; Inter for body/data; JetBrains
+  Mono for register numbers, codes, and timestamps.
+*/
+@theme {
+  --color-ink: #1b1b3a;
+  --color-ink-light: #2d2d54;
+  --color-paper: #faf7f2;
+  --color-paper-dim: #f0ebe1;
+  --color-amber: #e8a23d;
+  --color-amber-light: #f6c878;
+  --color-sage: #5b8c5a;
+  --color-sage-light: #e7f0e6;
+  --color-clay: #c75450;
+  --color-clay-light: #fbe9e8;
+  --color-slate: #6b7280;
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-ink-light) transparent;
+}
+
+/* Visible keyboard focus everywhere, per accessibility floor */
+:focus-visible {
+  outline: 2px solid var(--color-amber);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.4s ease-out both;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--color-paper-dim) 25%, #e5ddd0 37%, var(--color-paper-dim) 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+}
